@@ -102,6 +102,15 @@ const skillGroups: SkillGroup[] = [
 
 const projects = [
   {
+    title: "MindMate AI – Mental Wellness Chat Assistant",
+    description:
+      "An AI-powered mental wellness platform that provides emotional support through natural language conversations. Features include AI chat, mood tracking, authentication, and data visualization.",
+    tech: ["Next.js", "TypeScript", "Prisma ORM", "PostgreSQL", "Groq API"],
+    image: projectMindmate,
+    github: "https://github.com/samiwon/Mental-Wellness-Assistance",
+    demo: "https://mental-wellness-assistance.vercel.app/",
+  },
+  {
     title: "DietApp – Nutrition & Calorie Tracker",
     description:
       "Secure native Android health and nutrition tracking app built in Java using MVC architecture. Users log daily meals, track calories, pick dates via an interactive Date Picker, and manage food logs. Includes an Admin Dashboard with a RecyclerView to monitor user records and manage roles.",
@@ -117,25 +126,17 @@ const projects = [
     tech: ["Next.js", "React", "Tailwind CSS", "Framer Motion"],
     image: projectPortfolio,
     github: "https://github.com/samiwon/Samuel-Portfolio",
-    demo: "https://samiwon.github.io/Samuel-Portfolio/",
+    demo: "https://samuel-portfolio-blue.vercel.app/",
   },
-  {
-    title: "MindMate AI – Mental Wellness Chat Assistant",
-    description:
-      "An AI-powered mental wellness platform that provides emotional support through natural language conversations. Features include AI chat, mood tracking, authentication, and data visualization.",
-    tech: ["Next.js", "TypeScript", "Prisma ORM", "PostgreSQL", "Groq API"],
-    image: projectMindmate,
-    github: "#",
-    demo: "#",
-  },
+
   {
     title: "Mobile Application Project",
     description:
       "Responsive mobile application demonstrating modern UI design and practical problem solving.",
     tech: ["React Native", "TypeScript", "REST API"],
     image: projectMobile,
-    github: "#",
-    demo: "#",
+    github: "https://github.com/samiwon/AV_Messenger",
+    demo: "https://github.com/samiwon/AV_Messenger",
   },
 ];
 
