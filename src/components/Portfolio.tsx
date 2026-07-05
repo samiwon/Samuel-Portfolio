@@ -117,7 +117,7 @@ const projects = [
     tech: ["Next.js", "React", "Tailwind CSS", "Framer Motion"],
     image: projectPortfolio,
     github: "https://github.com/samiwon/Samuel-Portfolio",
-    demo: "#",
+    demo: "https://samiwon.github.io/Samuel-Portfolio/",
   },
   {
     title: "MindMate AI – Mental Wellness Chat Assistant",
