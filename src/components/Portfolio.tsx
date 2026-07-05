@@ -116,7 +116,7 @@ const projects = [
       "Modern responsive developer portfolio built using Next.js and Tailwind CSS showcasing projects, skills, education and contact information.",
     tech: ["Next.js", "React", "Tailwind CSS", "Framer Motion"],
     image: projectPortfolio,
-    github: "#",
+    github: "https://github.com/samiwon/Samuel-Portfolio",
     demo: "#",
   },
   {
