@@ -11,6 +11,7 @@ import {
   MapPin,
   Menu,
   Send,
+  Sparkles,
   X,
 } from "lucide-react";
 import {
@@ -197,11 +198,14 @@ function Nav() {
 function Hero() {
   return (
     <section id="home" className="hero-bg relative overflow-hidden pt-32 pb-20 md:pt-40 md:pb-28">
-      {/* Floating blobs */}
+      {/* Cinematic subtle dot-matrix grid overlay */}
+      <div className="bg-grid-pattern pointer-events-none absolute inset-0 opacity-40 [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_75%)]" />
+
+      {/* Floating ambient lighting blobs */}
       <div className="pointer-events-none absolute inset-0">
-        <div className="animate-blob absolute left-[5%] top-24 h-72 w-72 rounded-full bg-blue-500/30 blur-3xl" />
-        <div className="animate-blob absolute right-[8%] top-40 h-80 w-80 rounded-full bg-indigo-500/25 blur-3xl [animation-delay:-6s]" />
-        <div className="animate-blob absolute bottom-0 left-1/3 h-72 w-72 rounded-full bg-cyan-400/20 blur-3xl [animation-delay:-12s]" />
+        <div className="animate-blob absolute left-[5%] top-24 h-72 w-72 rounded-full bg-blue-500/20 blur-3xl" />
+        <div className="animate-blob absolute right-[8%] top-36 h-96 w-96 rounded-full bg-indigo-500/20 blur-3xl [animation-delay:-6s]" />
+        <div className="animate-blob absolute bottom-0 left-1/3 h-72 w-72 rounded-full bg-cyan-400/15 blur-3xl [animation-delay:-12s]" />
       </div>
 
       <div className="relative mx-auto grid max-w-6xl grid-cols-1 items-center gap-12 px-4 md:grid-cols-2">
@@ -250,27 +254,79 @@ function Hero() {
           </div>
         </motion.div>
 
+        {/* Cinematic Hero Portrait with Ambient Aura & Interactive 3D Physics */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
+          initial={{ opacity: 0, scale: 0.88 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="relative mx-auto"
+          transition={{ duration: 0.9, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+          className="relative mx-auto flex items-center justify-center [perspective:1000px]"
         >
+          {/* Ambient Multi-layered Breathing Glow */}
+          <div className="animate-pulse-glow pointer-events-none absolute -inset-6 rounded-full bg-gradient-to-tr from-cyan-500/35 via-blue-600/30 to-purple-600/35 blur-3xl" />
+          <div className="pointer-events-none absolute -inset-10 rounded-full bg-indigo-500/15 blur-[90px]" />
+
+          {/* Slow Rotating Luminous Cyber Orbital Ring with Traveling Satellite Dot */}
+          <div className="animate-spin-slow pointer-events-none absolute -inset-6 sm:-inset-8 rounded-full border border-dashed border-cyan-400/20 sm:block hidden">
+            <span className="absolute -top-1.5 left-1/2 -translate-x-1/2 h-3 w-3 rounded-full bg-cyan-400 shadow-[0_0_15px_#22d3ee]" />
+          </div>
+
           <div className="animate-float relative">
-            <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-blue-500 via-indigo-500 to-cyan-400 blur-2xl opacity-70" />
-            <div className="relative aspect-square h-64 w-64 overflow-hidden rounded-full border-2 border-white/20 shadow-[0_0_80px_rgba(59,130,246,0.5)] sm:h-80 sm:w-80 md:h-96 md:w-96">
-              <img
-                src={profileImg}
-                alt="Samuel Wondimu"
-                width={768}
-                height={768}
-                className="h-full w-full object-cover"
-              />
-            </div>
-            <div className="glass absolute -bottom-4 -left-4 rounded-2xl px-4 py-3 text-xs text-white/80">
-              <p className="font-semibold text-white">Available for work</p>
-              <p className="text-white/60">Remote · Ethiopia</p>
-            </div>
+            {/* Interactive 3D Framed Card */}
+            <motion.div
+              whileHover={{ scale: 1.025, rotateY: 3, rotateX: -3 }}
+              transition={{ type: "spring", stiffness: 260, damping: 20 }}
+              className="group relative rounded-[2.5rem] p-2 sm:p-2.5 backdrop-blur-2xl bg-gradient-to-b from-white/20 via-white/5 to-cyan-500/20 border border-white/20 shadow-[0_0_60px_-15px_rgba(56,189,248,0.45)]"
+            >
+              {/* Inner Portrait Wrapper */}
+              <div className="relative aspect-[4/5] sm:aspect-square h-72 w-72 sm:h-80 sm:w-80 md:h-[26rem] md:w-[26rem] overflow-hidden rounded-[2rem] bg-gradient-to-b from-slate-900 to-black">
+                <img
+                  src={profileImg}
+                  alt="Samuel Wondimu"
+                  width={768}
+                  height={768}
+                  className="h-full w-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
+                />
+
+                {/* Subtle Cinematic Vignette / Bottom Gradient */}
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#030712]/80 via-transparent to-transparent opacity-60" />
+
+                {/* Frosted Specular Sheen on Hover */}
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-white/0 via-white/5 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+              </div>
+            </motion.div>
+
+            {/* Top-Right Floating High-Tech Skill Badge */}
+            <motion.div
+              initial={{ opacity: 0, y: -15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 0.6 }}
+              className="animate-float-reverse absolute -top-4 -right-4 sm:-right-6 z-20 flex items-center gap-2.5 rounded-2xl border border-cyan-400/25 bg-slate-950/85 px-4 py-2.5 shadow-[0_10px_30px_rgba(0,0,0,0.6)] backdrop-blur-xl"
+            >
+              <div className="flex h-7 w-7 items-center justify-center rounded-xl bg-cyan-500/10 text-cyan-300 border border-cyan-400/30 shadow-[0_0_12px_rgba(34,211,238,0.3)]">
+                <Sparkles size={14} className="animate-spin-slow" />
+              </div>
+              <div className="text-left">
+                <p className="text-[11px] font-bold tracking-wide text-white">Full-Stack & AI</p>
+                <p className="text-[10px] text-cyan-300/80 font-mono">Modern Architect</p>
+              </div>
+            </motion.div>
+
+            {/* Bottom-Left Live Status Badge */}
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.6 }}
+              className="absolute -bottom-5 -left-4 sm:-left-6 z-20 flex items-center gap-3 rounded-2xl border border-white/15 bg-slate-950/85 px-4 py-3 shadow-[0_20px_40px_rgba(0,0,0,0.7)] backdrop-blur-xl"
+            >
+              <div className="relative flex h-3 w-3">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex h-3 w-3 rounded-full bg-emerald-400 shadow-[0_0_10px_#34d399]" />
+              </div>
+              <div className="text-left">
+                <p className="text-xs font-semibold tracking-wide text-white">Available for work</p>
+                <p className="text-[11px] text-white/60">Remote · Ethiopia</p>
+              </div>
+            </motion.div>
           </div>
         </motion.div>
       </div>
