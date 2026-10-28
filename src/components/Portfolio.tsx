@@ -1,5 +1,5 @@
-import { motion, useScroll, useSpring } from "framer-motion";
-import { useState, type FormEvent } from "react";
+import { motion, useScroll, useSpring, useTransform } from "framer-motion";
+import { useRef, useState, type FormEvent } from "react";
 import {
   ArrowUp,
   Download,
@@ -36,7 +36,6 @@ import { VscCode } from "react-icons/vsc";
 import type { IconType } from "react-icons";
 
 import profileImg from "@/assets/samuel-profile.jpg";
-import profileLeftImg from "@/assets/samuel-profile-left.jpg";
 import projectMindmate from "@/assets/project-mindmate.jpg";
 import projectPortfolio from "@/assets/project-portfolio.jpg";
 import projectMobile from "@/assets/project-mobile.jpg";
@@ -197,8 +196,30 @@ function Nav() {
 }
 
 function Hero() {
+  const containerRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"],
+  });
+
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 120,
+    damping: 28,
+    restDelta: 0.001,
+  });
+
+  // Cinematic scroll animation transforms
+  const imageY = useTransform(smoothProgress, [0, 1], [0, 90]);
+  const imageScale = useTransform(smoothProgress, [0, 1], [1, 1.1]);
+  const imageRotate = useTransform(smoothProgress, [0, 1], [0, 1.5]);
+  const glowOpacity = useTransform(smoothProgress, [0, 0.6, 1], [0.75, 0.95, 0.35]);
+
   return (
-    <section id="home" className="hero-bg relative overflow-hidden pt-32 pb-20 md:pt-40 md:pb-28">
+    <section
+      ref={containerRef}
+      id="home"
+      className="hero-bg relative overflow-hidden pt-32 pb-20 md:pt-40 md:pb-28"
+    >
       {/* Cinematic subtle dot-matrix grid overlay */}
       <div className="bg-grid-pattern pointer-events-none absolute inset-0 opacity-40 [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_75%)]" />
 
@@ -255,96 +276,35 @@ function Hero() {
           </div>
         </motion.div>
 
-        {/* Cinematic Hero Portrait with Ambient Aura & Interactive 3D Physics */}
+        {/* Cinematic Scroll-Driven Portrait Presentation (Original Image Preserved, No Extra Components) */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.88 }}
+          initial={{ opacity: 0, scale: 0.92 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.9, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          style={{ y: imageY }}
           className="relative mx-auto flex items-center justify-center [perspective:1000px]"
         >
-          {/* Ambient Multi-layered Breathing Glow */}
-          <div className="animate-pulse-glow pointer-events-none absolute -inset-6 rounded-full bg-gradient-to-tr from-cyan-500/35 via-blue-600/30 to-purple-600/35 blur-3xl" />
-          <div className="pointer-events-none absolute -inset-10 rounded-full bg-indigo-500/15 blur-[90px]" />
+          {/* Ambient Lighting Glow tied to scroll */}
+          <motion.div
+            style={{ opacity: glowOpacity }}
+            className="animate-pulse-glow pointer-events-none absolute -inset-6 rounded-full bg-gradient-to-tr from-cyan-500/35 via-blue-600/30 to-purple-600/35 blur-3xl"
+          />
 
-          {/* Slow Rotating Luminous Cyber Orbital Ring with Traveling Satellite Dot */}
-          <div className="animate-spin-slow pointer-events-none absolute -inset-6 sm:-inset-8 rounded-full border border-dashed border-cyan-400/20 sm:block hidden">
-            <span className="absolute -top-1.5 left-1/2 -translate-x-1/2 h-3 w-3 rounded-full bg-cyan-400 shadow-[0_0_15px_#22d3ee]" />
-          </div>
-
-          <div className="animate-float relative">
-            {/* Interactive 3D Framed Card */}
-            <motion.div
-              whileHover={{ scale: 1.025, rotateY: 3, rotateX: -3 }}
-              transition={{ type: "spring", stiffness: 260, damping: 20 }}
-              className="group relative rounded-[2.5rem] p-2 sm:p-2.5 backdrop-blur-2xl bg-gradient-to-b from-white/20 via-white/5 to-cyan-500/20 border border-white/20 shadow-[0_0_60px_-15px_rgba(56,189,248,0.45)]"
-            >
-              {/* Inner Portrait Wrapper with Smooth Head Turn Animation */}
-              <div className="relative aspect-[4/5] sm:aspect-square h-72 w-72 sm:h-80 sm:w-80 md:h-[26rem] md:w-[26rem] overflow-hidden rounded-[2rem] bg-gradient-to-b from-slate-900 to-black">
-                {/* Left-facing keyframe that smoothly turns */}
-                <motion.img
-                  src={profileLeftImg}
-                  alt="Samuel Wondimu"
-                  width={768}
-                  height={768}
-                  initial={{ opacity: 1, scale: 1.02 }}
-                  animate={{ opacity: 0, scale: 1 }}
-                  transition={{ duration: 1.8, delay: 0.6, ease: [0.4, 0, 0.2, 1] }}
-                  className="absolute inset-0 h-full w-full object-cover object-top"
-                />
-
-                {/* Direct Front-Facing Final Portrait */}
-                <motion.img
-                  src={profileImg}
-                  alt="Samuel Wondimu"
-                  width={768}
-                  height={768}
-                  initial={{ opacity: 0, scale: 1.03 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 1.8, delay: 0.6, ease: [0.4, 0, 0.2, 1] }}
-                  className="h-full w-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
-                />
-
-                {/* Subtle Cinematic Vignette / Bottom Gradient */}
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#030712]/80 via-transparent to-transparent opacity-60" />
-
-                {/* Frosted Specular Sheen on Hover */}
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-white/0 via-white/5 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-              </div>
-            </motion.div>
-
-            {/* Top-Right Floating High-Tech Skill Badge */}
-            <motion.div
-              initial={{ opacity: 0, y: -15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.6 }}
-              className="animate-float-reverse absolute -top-4 -right-4 sm:-right-6 z-20 flex items-center gap-2.5 rounded-2xl border border-cyan-400/25 bg-slate-950/85 px-4 py-2.5 shadow-[0_10px_30px_rgba(0,0,0,0.6)] backdrop-blur-xl"
-            >
-              <div className="flex h-7 w-7 items-center justify-center rounded-xl bg-cyan-500/10 text-cyan-300 border border-cyan-400/30 shadow-[0_0_12px_rgba(34,211,238,0.3)]">
-                <Sparkles size={14} className="animate-spin-slow" />
-              </div>
-              <div className="text-left">
-                <p className="text-[11px] font-bold tracking-wide text-white">Full-Stack & AI</p>
-                <p className="text-[10px] text-cyan-300/80 font-mono">Modern Architect</p>
-              </div>
-            </motion.div>
-
-            {/* Bottom-Left Live Status Badge */}
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 0.6 }}
-              className="absolute -bottom-5 -left-4 sm:-left-6 z-20 flex items-center gap-3 rounded-2xl border border-white/15 bg-slate-950/85 px-4 py-3 shadow-[0_20px_40px_rgba(0,0,0,0.7)] backdrop-blur-xl"
-            >
-              <div className="relative flex h-3 w-3">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-                <span className="relative inline-flex h-3 w-3 rounded-full bg-emerald-400 shadow-[0_0_10px_#34d399]" />
-              </div>
-              <div className="text-left">
-                <p className="text-xs font-semibold tracking-wide text-white">Available for work</p>
-                <p className="text-[11px] text-white/60">Remote · Ethiopia</p>
-              </div>
-            </motion.div>
-          </div>
+          {/* Smooth Scroll-Animated Portrait Frame */}
+          <motion.div
+            style={{ scale: imageScale, rotate: imageRotate }}
+            className="group relative aspect-square h-64 w-64 sm:h-80 sm:w-80 md:h-[26rem] md:w-[26rem] overflow-hidden rounded-[2.5rem] border border-white/20 bg-slate-950/80 shadow-[0_0_60px_-15px_rgba(56,189,248,0.4)] backdrop-blur-xl"
+          >
+            <img
+              src={profileImg}
+              alt="Samuel Wondimu"
+              width={768}
+              height={768}
+              className="h-full w-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
+            />
+            {/* Subtle Cinematic Vignette */}
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#030712]/60 via-transparent to-transparent opacity-70" />
+          </motion.div>
         </motion.div>
       </div>
     </section>
