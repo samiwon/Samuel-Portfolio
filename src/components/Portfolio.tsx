@@ -36,6 +36,7 @@ import { VscCode } from "react-icons/vsc";
 import type { IconType } from "react-icons";
 
 import profileImg from "@/assets/samuel-profile.jpg";
+import profileLeftImg from "@/assets/samuel-profile-left.jpg";
 import projectMindmate from "@/assets/project-mindmate.jpg";
 import projectPortfolio from "@/assets/project-portfolio.jpg";
 import projectMobile from "@/assets/project-mobile.jpg";
@@ -277,13 +278,29 @@ function Hero() {
               transition={{ type: "spring", stiffness: 260, damping: 20 }}
               className="group relative rounded-[2.5rem] p-2 sm:p-2.5 backdrop-blur-2xl bg-gradient-to-b from-white/20 via-white/5 to-cyan-500/20 border border-white/20 shadow-[0_0_60px_-15px_rgba(56,189,248,0.45)]"
             >
-              {/* Inner Portrait Wrapper */}
+              {/* Inner Portrait Wrapper with Smooth Head Turn Animation */}
               <div className="relative aspect-[4/5] sm:aspect-square h-72 w-72 sm:h-80 sm:w-80 md:h-[26rem] md:w-[26rem] overflow-hidden rounded-[2rem] bg-gradient-to-b from-slate-900 to-black">
-                <img
+                {/* Left-facing keyframe that smoothly turns */}
+                <motion.img
+                  src={profileLeftImg}
+                  alt="Samuel Wondimu"
+                  width={768}
+                  height={768}
+                  initial={{ opacity: 1, scale: 1.02 }}
+                  animate={{ opacity: 0, scale: 1 }}
+                  transition={{ duration: 1.8, delay: 0.6, ease: [0.4, 0, 0.2, 1] }}
+                  className="absolute inset-0 h-full w-full object-cover object-top"
+                />
+
+                {/* Direct Front-Facing Final Portrait */}
+                <motion.img
                   src={profileImg}
                   alt="Samuel Wondimu"
                   width={768}
                   height={768}
+                  initial={{ opacity: 0, scale: 1.03 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 1.8, delay: 0.6, ease: [0.4, 0, 0.2, 1] }}
                   className="h-full w-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
                 />
 
